@@ -29,6 +29,12 @@
             color: var(--text-color);
             line-height: 1.6;
         }
+        
+        /* --- PERUBAHAN CSS: Tambahkan ini untuk mengunci scroll --- */
+        body.modal-open {
+            overflow: hidden;
+        }
+        /* --- Akhir Perubahan CSS --- */
 
         .container {
             max-width: 1200px;
@@ -72,7 +78,6 @@
             flex-direction: column;
         }
         
-        /* Efek hover umum untuk semua kartu */
         .category-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
@@ -82,7 +87,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-grow: 1; /* Membuat bagian ini tumbuh mengisi ruang */
+            flex-grow: 1;
         }
 
         .main-category h2 {
@@ -92,7 +97,6 @@
             margin-bottom: 5px;
         }
 
-        /* --- Style BARU untuk kategori tanpa sub-kategori --- */
         .direct-action-indicator {
             font-size: 12px;
             font-weight: 500;
@@ -106,7 +110,6 @@
         .category-card:hover .direct-action-indicator {
             background-color: #cce0ff;
         }
-        /* --- Akhir style BARU --- */
 
         .sub-category-list {
             margin-top: 15px;
@@ -309,9 +312,7 @@
             let subKategoriHTML = '';
             let actionIndicatorHTML = '';
             
-            // PERUBAHAN LOGIKA DI SINI
             if (kategori.sub_kategori.length > 0) {
-                // Jika ADA sub-kategori, tampilkan daftarnya
                 subKategoriHTML = `
                     <div class="sub-category-list">
                         <h3>Sub-kategori:</h3>
@@ -322,13 +323,10 @@
                         `).join('')}
                     </div>
                 `;
-                // Klik pada kartu hanya akan menampilkan sub-kategori, bukan memuat produk
                 card.onclick = () => card.querySelector('.sub-category-list').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
             } else {
-                // Jika TIDAK ADA sub-kategori, tampilkan indikator aksi
                 actionIndicatorHTML = `<span class="direct-action-indicator">Lihat Produk &rarr;</span>`;
-                // Klik pada kartu akan langsung memuat produk
                 card.onclick = () => fetchProducts(kategori.id_kategori, kategori.nama_kategori);
             }
 
@@ -352,7 +350,7 @@
         categoryCards.forEach(card => {
             const categoryName = card.querySelector(".main-category h2").textContent.toLowerCase();
             if (categoryName.includes(searchValue)) {
-                card.style.display = "flex"; // Gunakan flex karena layout kartu diubah
+                card.style.display = "flex";
                 found = true;
             } else {
                 card.style.display = "none";
@@ -363,6 +361,9 @@
     }
     
     function openPopupWithLoader(kategoriNama) {
+        // PERUBAHAN JAVASCRIPT: Tambahkan kelas ke body
+        document.body.classList.add('modal-open');
+        
         document.getElementById("popup").style.display = "flex";
         document.getElementById("popup-title").textContent = `Produk Kategori: ${kategoriNama}`;
         document.getElementById("products-container").innerHTML = '<div class="loader"></div>';
@@ -427,6 +428,9 @@
     }
 
     function closePopup() {
+        // PERUBAHAN JAVASCRIPT: Hapus kelas dari body
+        document.body.classList.remove('modal-open');
+        
         document.getElementById("popup").style.display = "none";
     }
 </script>
