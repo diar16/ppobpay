@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Harga Produk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* --- PERUBAHAN CSS: Tambahkan ini untuk mengunci scroll --- */
+        body.modal-open {
+            overflow: hidden;
+        }
+        /* --- Akhir Perubahan CSS --- */
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .search-bar {
+            margin-bottom: 30px;
+        }
+
+        #categorySearch {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+
+        #categorySearch:focus {
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        #categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .main-category {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .main-category h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .direct-action-indicator {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--primary-color);
+            background-color: #e7f1ff;
+            padding: 4px 10px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .category-card:hover .direct-action-indicator {
+            background-color: #cce0ff;
+        }
+
+        .sub-category-list {
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .sub-category-list h3 {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .sub-category-item {
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background-color: #f1f1f1;
+            margin-bottom: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sub-category-item:hover {
+            background-color: #e0e0e0;
+        }
+
+        .not-found {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .not-found img {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-content {
+            background-color: var(--card-bg);
+            margin: auto;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .popup-header h2 {
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+
+        .close-btn {
+            font-size: 28px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .products-container {
+            overflow-y: auto;
+        }
+        
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 40px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .product-table-wrapper {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        td {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" id="categorySearch" placeholder="Cari kategori produk..." oninput="filterCategories()">
+        </div>
+
+        <div id="categories-grid"></div>
+
+        <div id="noResults" class="not-found">
+            <img src="https://neropict.wordpress.com/wp-content/uploads/2025/02/undraw_file-search_cbur.png" alt="Tidak ditemukan">
+            <p>Maaf, kategori yang Anda cari tidak ditemukan.</p>
+        </div>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2 id="popup-title"></h2>
+                <span class="close-btn" onclick="closePopup()">&times;</span>
+            </div>
+            <div id="products-container" class="products-container"></div>
+        </div>
+    </div>
+
+<script>
+    const TokenApi = "eyJhcHAiOiIxNzQ3MDUiLCJhdXRoIjoiMjAyNTA2MDUiLCJzaWduIjoiXC81eW0wMkp1bWJadXJjY1lNaDlobkE9PSJ9=";
+    const HargaMargin = 250;
+
+    document.addEventListener("DOMContentLoaded", fetchCategories);
+
+    async function fetchCategories() {
+        const url = `https://openapi.bukaolshop.net/v1/app/kategori?token=${TokenApi}`;
+        const grid = document.getElementById("categories-grid");
+        grid.innerHTML = '<div class="loader"></div>';
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            const data = await response.json();
+            if (data.code !== 200) throw new Error(`API error! Status: ${data.status}`);
+            displayCategories(data.data);
+        } catch (error) {
+            console.error("Gagal mengambil kategori:", error);
+            grid.innerHTML = "<p>Gagal memuat data kategori. Silakan coba lagi nanti.</p>";
+        }
+    }
+
+    function displayCategories(categories) {
+        const grid = document.getElementById("categories-grid");
+        grid.innerHTML = "";
+
+        categories.forEach(kategori => {
+            const card = document.createElement("div");
+            card.className = "category-card";
+            
+            let subKategoriHTML = '';
+            let actionIndicatorHTML = '';
+            
+            if (kategori.sub_kategori.length > 0) {
+                subKategoriHTML = `
+                    <div class="sub-category-list">
+                        <h3>Sub-kategori:</h3>
+                        ${kategori.sub_kategori.map(sub => `
+                            <div class="sub-category-item" onclick="event.stopPropagation(); fetchProducts(${sub.id_kategori}, '${sub.nama_kategori}')">
+                                ${sub.nama_kategori}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                card.onclick = () => card.querySelector('.sub-category-list').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            } else {
+                actionIndicatorHTML = `<span class="direct-action-indicator">Lihat Produk &rarr;</span>`;
+                card.onclick = () => fetchProducts(kategori.id_kategori, kategori.nama_kategori);
+            }
+
+            card.innerHTML = `
+                <div class="main-category">
+                    <h2>${kategori.nama_kategori}</h2>
+                    ${actionIndicatorHTML}
+                </div>
+                ${subKategoriHTML}
+            `;
+            
+            grid.appendChild(card);
+        });
+    }
+
+    function filterCategories() {
+        const searchValue = document.getElementById("categorySearch").value.toLowerCase();
+        const categoryCards = document.querySelectorAll(".category-card");
+        let found = false;
+
+        categoryCards.forEach(card => {
+            const categoryName = card.querySelector(".main-category h2").textContent.toLowerCase();
+            if (categoryName.includes(searchValue)) {
+                card.style.display = "flex";
+                found = true;
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        document.getElementById("noResults").style.display = found ? "none" : "block";
+    }
+    
+    function openPopupWithLoader(kategoriNama) {
+        // PERUBAHAN JAVASCRIPT: Tambahkan kelas ke body
+        document.body.classList.add('modal-open');
+        
+        document.getElementById("popup").style.display = "flex";
+        document.getElementById("popup-title").textContent = `Produk Kategori: ${kategoriNama}`;
+        document.getElementById("products-container").innerHTML = '<div class="loader"></div>';
+    }
+
+    async function fetchProducts(kategoriId, kategoriNama) {
+        openPopupWithLoader(kategoriNama);
+        const url = `https://openapi.bukaolshop.net/v1/app/produk?token=${TokenApi}&id_kategori=${kategoriId}&page=1&total_data=100`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            if (data.code !== 200) throw new Error(`API error! Status: ${data.status}`);
+            displayProducts(data.data);
+        } catch (error) {
+            console.error("Gagal mengambil produk:", error);
+            document.getElementById("products-container").innerHTML = "<p>Gagal memuat produk.</p>";
+        }
+    }
+    
+    function formatRupiah(angka) {
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+    }
+
+    function displayProducts(products) {
+        const productsContainer = document.getElementById("products-container");
+        
+        if (!products || products.length === 0) {
+            productsContainer.innerHTML = "<p>Tidak ada produk untuk kategori ini.</p>";
+            return;
+        }
+
+        products.sort((a, b) => a.harga_produk - b.harga_produk);
+        
+        let tableHTML = `
+            <div class="product-table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama Produk</th>
+                            <th>Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+        products.forEach(product => {
+            const hargaJual = product.harga_produk_asli > 0 
+                ? product.harga_produk_asli 
+                : product.harga_produk + HargaMargin;
+
+            tableHTML += `
+                <tr>
+                    <td>${product.nama_produk}</td>
+                    <td>${formatRupiah(hargaJual)}</td>
+                </tr>
+            `;
+        });
+
+        tableHTML += `</tbody></table></div>`;
+        productsContainer.innerHTML = tableHTML;
+    }
+
+    function closePopup() {
+        // PERUBAHAN JAVASCRIPT: Hapus kelas dari body
+        document.body.classList.remove('modal-open');
+        
+        document.getElementById("popup").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
