@@ -1,53 +1,142 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <link rel="icon" type="image/x-icon" href="/assets/logo.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/logo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Harga Produk</title>
+    <title>Daftar Harga - PPOBPay</title>
+    
+    <link rel="icon" type="image/x-icon" href="/assets/logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/logo.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
+        /* ====== General Styles & Variables (Gabungan) ====== */
         :root {
+            /* Dari Kebijakan Privasi */
+            --primary-color-old: #007BFF;
+            --dark-color: #333;
+            --light-color: #fff;
+            --text-color-old: #555;
+            --header-dark: #111;
+            
+            /* Dari Daftar Harga */
             --primary-color: #0056b3;
             --secondary-color: #f8f9fa;
             --card-bg: #ffffff;
             --text-color: #333333;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --border-radius: 12px;
+            --font-family: 'Poppins', sans-serif;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
+            font-family: var(--font-family);
             line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--secondary-color); /* Latar belakang dari Daftar Harga */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        
-        /* --- PERUBAHAN CSS: Tambahkan ini untuk mengunci scroll --- */
-        body.modal-open {
-            overflow: hidden;
-        }
-        /* --- Akhir Perubahan CSS --- */
 
         .container {
-            max-width: 1200px;
+            max-width: 1200px; /* Diperlebar untuk daftar harga */
             margin: 0 auto;
             padding: 20px;
         }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color-old);
+        }
 
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* ====== Header & Navigation (Dari Kebijakan Privasi) ====== */
+        header {
+            background: var(--header-dark);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--light-color);
+        }
+
+        .logo img {
+            height: 40px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-menu li a {
+            color: var(--light-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--primary-color-old);
+            text-decoration: none;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            color: var(--light-color);
+            font-size: 1.5rem;
+        }
+        
+        /* ====== Main Content Section ====== */
+        main {
+            flex: 1;
+            padding: 30px 0;
+        }
+        
+        /* --- CSS untuk Daftar Harga --- */
+        body.modal-open {
+            overflow: hidden;
+        }
         .search-bar {
             margin-bottom: 30px;
         }
-
         #categorySearch {
             width: 100%;
             padding: 15px 20px;
@@ -57,18 +146,15 @@
             outline: none;
             transition: box-shadow 0.3s ease;
         }
-
         #categorySearch:focus {
             box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
             border-color: var(--primary-color);
         }
-
         #categories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
-
         .category-card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
@@ -79,26 +165,22 @@
             display: flex;
             flex-direction: column;
         }
-        
         .category-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
-        
         .main-category {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-grow: 1;
         }
-
         .main-category h2 {
             font-size: 18px;
             font-weight: 600;
             color: var(--primary-color);
             margin-bottom: 5px;
         }
-
         .direct-action-indicator {
             font-size: 12px;
             font-weight: 500;
@@ -108,24 +190,20 @@
             border-radius: 20px;
             transition: background-color 0.3s ease;
         }
-
         .category-card:hover .direct-action-indicator {
             background-color: #cce0ff;
         }
-
         .sub-category-list {
             margin-top: 15px;
             border-top: 1px solid #eee;
             padding-top: 15px;
         }
-
         .sub-category-list h3 {
             font-size: 14px;
             color: #777;
             margin-bottom: 10px;
             font-weight: 500;
         }
-        
         .sub-category-item {
             font-size: 14px;
             padding: 8px 12px;
@@ -134,26 +212,22 @@
             margin-bottom: 8px;
             transition: background-color 0.3s ease;
         }
-
         .sub-category-item:hover {
             background-color: #e0e0e0;
         }
-
         .not-found {
             text-align: center;
             padding: 40px;
             display: none;
         }
-
         .not-found img {
             max-width: 200px;
             margin-bottom: 20px;
         }
-
         .popup {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 2000; /* Lebih tinggi dari header */
             left: 0;
             top: 0;
             width: 100%;
@@ -163,7 +237,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .popup-content {
             background-color: var(--card-bg);
             margin: auto;
@@ -176,7 +249,6 @@
             flex-direction: column;
             position: relative;
         }
-        
         .popup-header {
             display: flex;
             justify-content: space-between;
@@ -185,12 +257,10 @@
             padding-bottom: 15px;
             margin-bottom: 20px;
         }
-
         .popup-header h2 {
             font-size: 20px;
             color: var(--primary-color);
         }
-
         .close-btn {
             font-size: 28px;
             font-weight: bold;
@@ -199,15 +269,12 @@
             border: none;
             background: none;
         }
-
         .close-btn:hover {
             color: #333;
         }
-
         .products-container {
             overflow-y: auto;
         }
-        
         .loader {
             border: 4px solid #f3f3f3;
             border-top: 4px solid var(--primary-color);
@@ -217,58 +284,119 @@
             animation: spin 1s linear infinite;
             margin: 40px auto;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
         .product-table-wrapper {
             overflow-x: auto;
         }
-        
         table {
             width: 100%;
             border-collapse: collapse;
         }
-
         th, td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
-
         th {
             background-color: var(--primary-color);
             color: white;
             font-weight: 500;
             font-size: 14px;
         }
-
         td {
             font-size: 14px;
             font-weight: 500;
         }
-
         tbody tr:last-child td {
             border-bottom: none;
+        }
+
+        /* ====== Footer (Dari Kebijakan Privasi) ====== */
+        footer {
+            background: var(--dark-color);
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.8;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* ====== Responsive Design (Dari Kebijakan Privasi) ====== */
+        @media (max-width: 768px) {
+            .navbar, .copyright {
+                padding: 0 20px;
+            }
+            .hamburger {
+                display: block;
+            }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background-color: var(--header-dark);
+                padding: 20px 0;
+                text-align: center;
+                gap: 0;
+                border-top: 1px solid #444;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .nav-menu li {
+                padding: 15px 0;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="search-bar">
-            <input type="text" id="categorySearch" placeholder="Cari kategori produk..." oninput="filterCategories()">
-        </div>
+    <header>
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjPJ4nIiCbIxH-vZ4CTU_A6tUD0qfyPTmZnbxuLmeRM_srB0rpfzKD0qVji3OHKoMS4uFhR3qh3Rq8TO4p0Shc2R-IAneIowkmklYq8AzUKyV7H2gQc3goUjIUv8_ARIjGnmDnjMYohtyRK4IiC-20LCCL6PVx-RucItAy8bMS_knwlBm3_Zd388kK570XM=s1600" alt="Logo PPOBPay">
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/download.html">Download</a></li>
+                <li><a href="/daftar-harga.html">Daftar Harga</a></li>
+                <li><a href="https://wa.me/+6289505687030">Kontak Kami</a></li>
+                <li><a href="/kebijakan-privasi.html">Kebijakan Privasi</a></li>
+                <li><a href="/tentang.html">Tentang</a></li>
+            </ul>
+            
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
 
-        <div id="categories-grid"></div>
+    <main>
+        <div class="container">
+            <div class="search-bar">
+                <input type="text" id="categorySearch" placeholder="Cari kategori produk..." oninput="filterCategories()">
+            </div>
 
-        <div id="noResults" class="not-found">
-            <img src="https://neropict.wordpress.com/wp-content/uploads/2025/02/undraw_file-search_cbur.png" alt="Tidak ditemukan">
-            <p>Maaf, kategori yang Anda cari tidak ditemukan.</p>
+            <div id="categories-grid"></div>
+
+            <div id="noResults" class="not-found">
+                <img src="https://neropict.wordpress.com/wp-content/uploads/2025/02/undraw_file-search_cbur.png" alt="Tidak ditemukan">
+                <p>Maaf, kategori yang Anda cari tidak ditemukan.</p>
+            </div>
         </div>
-    </div>
+    </main>
 
     <div id="popup" class="popup">
         <div class="popup-content">
@@ -279,163 +407,175 @@
             <div id="products-container" class="products-container"></div>
         </div>
     </div>
+    
+    <footer>
+        <div class="copyright">
+            <p>&copy; 2025 PPOBPay. All Rights Reserved.</p>
+            <p>Developed by Ardis</p>
+        </div>
+    </footer>
 
-<script>
-    const TokenApi = "eyJhcHAiOiIxNzQ3MDUiLCJhdXRoIjoiMjAyNTA2MDUiLCJzaWduIjoiXC81eW0wMkp1bWJadXJjY1lNaDlobkE9PSJ9=";
-    const HargaMargin = 0;
+    <script>
+        // Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
 
-    document.addEventListener("DOMContentLoaded", fetchCategories);
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
 
-    async function fetchCategories() {
-        const url = `https://openapi.bukaolshop.net/v1/app/kategori?token=${TokenApi}`;
-        const grid = document.getElementById("categories-grid");
-        grid.innerHTML = '<div class="loader"></div>';
+        // Skrip untuk Daftar Harga
+        const TokenApi = "eyJhcHAiOiIxNzQ3MDUiLCJhdXRoIjoiMjAyNTA2MDUiLCJzaWduIjoiXC81eW0wMkp1bWJadXJjY1lNaDlobkE9PSJ9=";
+        const HargaMargin = 0;
 
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-            const data = await response.json();
-            if (data.code !== 200) throw new Error(`API error! Status: ${data.status}`);
-            displayCategories(data.data);
-        } catch (error) {
-            console.error("Gagal mengambil kategori:", error);
-            grid.innerHTML = "<p>Gagal memuat data kategori. Silakan coba lagi nanti.</p>";
+        document.addEventListener("DOMContentLoaded", fetchCategories);
+
+        async function fetchCategories() {
+            const url = `https://openapi.bukaolshop.net/v1/app/kategori?token=${TokenApi}`;
+            const grid = document.getElementById("categories-grid");
+            grid.innerHTML = '<div class="loader"></div>';
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const data = await response.json();
+                if (data.code !== 200) throw new Error(`API error! Status: ${data.status}`);
+                displayCategories(data.data);
+            } catch (error) {
+                console.error("Gagal mengambil kategori:", error);
+                grid.innerHTML = "<p>Gagal memuat data kategori. Silakan coba lagi nanti.</p>";
+            }
         }
-    }
 
-    function displayCategories(categories) {
-        const grid = document.getElementById("categories-grid");
-        grid.innerHTML = "";
+        function displayCategories(categories) {
+            const grid = document.getElementById("categories-grid");
+            grid.innerHTML = "";
 
-        categories.forEach(kategori => {
-            const card = document.createElement("div");
-            card.className = "category-card";
-            
-            let subKategoriHTML = '';
-            let actionIndicatorHTML = '';
-            
-            if (kategori.sub_kategori.length > 0) {
-                subKategoriHTML = `
-                    <div class="sub-category-list">
-                        <h3>Sub-kategori:</h3>
-                        ${kategori.sub_kategori.map(sub => `
-                            <div class="sub-category-item" onclick="event.stopPropagation(); fetchProducts(${sub.id_kategori}, '${sub.nama_kategori}')">
-                                ${sub.nama_kategori}
-                            </div>
-                        `).join('')}
+            categories.forEach(kategori => {
+                const card = document.createElement("div");
+                card.className = "category-card";
+                
+                let subKategoriHTML = '';
+                let actionIndicatorHTML = '';
+                
+                if (kategori.sub_kategori.length > 0) {
+                    subKategoriHTML = `
+                        <div class="sub-category-list">
+                            <h3>Sub-kategori:</h3>
+                            ${kategori.sub_kategori.map(sub => `
+                                <div class="sub-category-item" onclick="event.stopPropagation(); fetchProducts(${sub.id_kategori}, '${sub.nama_kategori}')">
+                                    ${sub.nama_kategori}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    card.onclick = () => card.querySelector('.sub-category-list').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    actionIndicatorHTML = `<span class="direct-action-indicator">Lihat Produk &rarr;</span>`;
+                    card.onclick = () => fetchProducts(kategori.id_kategori, kategori.nama_kategori);
+                }
+
+                card.innerHTML = `
+                    <div class="main-category">
+                        <h2>${kategori.nama_kategori}</h2>
+                        ${actionIndicatorHTML}
                     </div>
+                    ${subKategoriHTML}
                 `;
-                card.onclick = () => card.querySelector('.sub-category-list').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                grid.appendChild(card);
+            });
+        }
 
-            } else {
-                actionIndicatorHTML = `<span class="direct-action-indicator">Lihat Produk &rarr;</span>`;
-                card.onclick = () => fetchProducts(kategori.id_kategori, kategori.nama_kategori);
+        function filterCategories() {
+            const searchValue = document.getElementById("categorySearch").value.toLowerCase();
+            const categoryCards = document.querySelectorAll(".category-card");
+            let found = false;
+
+            categoryCards.forEach(card => {
+                const categoryName = card.querySelector(".main-category h2").textContent.toLowerCase();
+                if (categoryName.includes(searchValue)) {
+                    card.style.display = "flex";
+                    found = true;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            document.getElementById("noResults").style.display = found ? "none" : "block";
+        }
+        
+        function openPopupWithLoader(kategoriNama) {
+            document.body.classList.add('modal-open');
+            document.getElementById("popup").style.display = "flex";
+            document.getElementById("popup-title").textContent = `Produk Kategori: ${kategoriNama}`;
+            document.getElementById("products-container").innerHTML = '<div class="loader"></div>';
+        }
+
+        async function fetchProducts(kategoriId, kategoriNama) {
+            openPopupWithLoader(kategoriNama);
+            const url = `https://openapi.bukaolshop.net/v1/app/produk?token=${TokenApi}&id_kategori=${kategoriId}&page=1&total_data=100`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.code !== 200) throw new Error(`API error! Status: ${data.status}`);
+                displayProducts(data.data);
+            } catch (error) {
+                console.error("Gagal mengambil produk:", error);
+                document.getElementById("products-container").innerHTML = "<p>Gagal memuat produk.</p>";
             }
+        }
+        
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+        }
 
-            card.innerHTML = `
-                <div class="main-category">
-                    <h2>${kategori.nama_kategori}</h2>
-                    ${actionIndicatorHTML}
-                </div>
-                ${subKategoriHTML}
-            `;
+        function displayProducts(products) {
+            const productsContainer = document.getElementById("products-container");
             
-            grid.appendChild(card);
-        });
-    }
-
-    function filterCategories() {
-        const searchValue = document.getElementById("categorySearch").value.toLowerCase();
-        const categoryCards = document.querySelectorAll(".category-card");
-        let found = false;
-
-        categoryCards.forEach(card => {
-            const categoryName = card.querySelector(".main-category h2").textContent.toLowerCase();
-            if (categoryName.includes(searchValue)) {
-                card.style.display = "flex";
-                found = true;
-            } else {
-                card.style.display = "none";
+            if (!products || products.length === 0) {
+                productsContainer.innerHTML = "<p>Tidak ada produk untuk kategori ini.</p>";
+                return;
             }
-        });
 
-        document.getElementById("noResults").style.display = found ? "none" : "block";
-    }
-    
-    function openPopupWithLoader(kategoriNama) {
-        // PERUBAHAN JAVASCRIPT: Tambahkan kelas ke body
-        document.body.classList.add('modal-open');
-        
-        document.getElementById("popup").style.display = "flex";
-        document.getElementById("popup-title").textContent = `Produk Kategori: ${kategoriNama}`;
-        document.getElementById("products-container").innerHTML = '<div class="loader"></div>';
-    }
-
-    async function fetchProducts(kategoriId, kategoriNama) {
-        openPopupWithLoader(kategoriNama);
-        const url = `https://openapi.bukaolshop.net/v1/app/produk?token=${TokenApi}&id_kategori=${kategoriId}&page=1&total_data=100`;
-
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            if (data.code !== 200) throw new Error(`API error! Status: ${data.status}`);
-            displayProducts(data.data);
-        } catch (error) {
-            console.error("Gagal mengambil produk:", error);
-            document.getElementById("products-container").innerHTML = "<p>Gagal memuat produk.</p>";
-        }
-    }
-    
-    function formatRupiah(angka) {
-        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
-    }
-
-    function displayProducts(products) {
-        const productsContainer = document.getElementById("products-container");
-        
-        if (!products || products.length === 0) {
-            productsContainer.innerHTML = "<p>Tidak ada produk untuk kategori ini.</p>";
-            return;
-        }
-
-        products.sort((a, b) => a.harga_produk - b.harga_produk);
-        
-        let tableHTML = `
-            <div class="product-table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nama Produk</th>
-                            <th>Harga</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-        `;
-
-        products.forEach(product => {
-            const hargaJual = product.harga_produk_asli > 0 
-                ? product.harga_produk_asli 
-                : product.harga_produk + HargaMargin;
-
-            tableHTML += `
-                <tr>
-                    <td>${product.nama_produk}</td>
-                    <td>${formatRupiah(hargaJual)}</td>
-                </tr>
+            products.sort((a, b) => a.harga_produk - b.harga_produk);
+            
+            let tableHTML = `
+                <div class="product-table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Produk</th>
+                                <th>Harga</th>
+                            </tr>
+                        </thead>
+                        <tbody>
             `;
-        });
 
-        tableHTML += `</tbody></table></div>`;
-        productsContainer.innerHTML = tableHTML;
-    }
+            products.forEach(product => {
+                const hargaJual = product.harga_produk_asli > 0 
+                    ? product.harga_produk_asli 
+                    : product.harga_produk + HargaMargin;
 
-    function closePopup() {
-        // PERUBAHAN JAVASCRIPT: Hapus kelas dari body
-        document.body.classList.remove('modal-open');
-        
-        document.getElementById("popup").style.display = "none";
-    }
-</script>
+                tableHTML += `
+                        <tr>
+                            <td>${product.nama_produk}</td>
+                            <td>${formatRupiah(hargaJual)}</td>
+                        </tr>
+                `;
+            });
+
+            tableHTML += `</tbody></table></div>`;
+            productsContainer.innerHTML = tableHTML;
+        }
+
+        function closePopup() {
+            document.body.classList.remove('modal-open');
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
 
 </body>
 </html>
