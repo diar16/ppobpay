@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - PPOBPay</title>
+    <meta name="description" content="Kenali PPOBPay, aplikasi pembayaran digital dari Ardis App. Solusi praktis, aman, dan hemat untuk semua kebutuhan transaksi Anda.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* ====== General Styles & Variables ====== */
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f4f7fc;
+            --dark-color: #333;
+            --light-color: #fff;
+            --text-color: #555;
+            --header-dark: #111;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        /* ====== Header & Navigation ====== */
+        header {
+            background: var(--header-dark);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--light-color);
+        }
+
+        .logo img {
+            height: 40px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-menu li a {
+            color: #ccc; /* Warna default link navigasi */
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        /* Perubahan: Warna hover dan aktif dikembalikan menjadi biru */
+        .nav-menu li a:hover, .nav-menu li a.active {
+            color: var(--primary-color); /* Warna biru saat aktif/hover */
+            text-decoration: none;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            color: var(--light-color);
+            font-size: 1.5rem;
+        }
+        
+        /* ====== Main Content Section ====== */
+        main {
+            flex: 1; 
+        }
+        
+        .content-section {
+            padding: 50px 0;
+        }
+
+        .content-section h1,
+        .content-section h2 {
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .content-section h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+
+        .content-section h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-top: 40px;
+        }
+
+        .content-section p,
+        .content-section ul {
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul {
+            list-style-position: inside;
+            padding-left: 10px;
+        }
+
+        .feature-box {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .feature-box h3 {
+            color: var(--dark-color);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .slogan {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        /* ====== Footer ====== */
+        footer {
+            background: var(--dark-color);
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.8;
+        }
+
+        /* ====== Responsive Design ====== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .content-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.4rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background-color: var(--header-dark);
+                padding: 20px 0;
+                text-align: center;
+                gap: 0;
+                border-top: 1px solid #444;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                padding: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="/ppobpay" class="logo">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjPJ4nIiCbIxH-vZ4CTU_A6tUD0qfyPTmZnbxuLmeRM_srB0rpfzKD0qVji3OHKoMS4uFhR3qh3Rq8TO4p0Shc2R-IAneIowkmklYq8AzUKyV7H2gQc3goUjIUv8_ARIjGnmDnjMYohtyRK4IiC-20LCCL6PVx-RucItAy8bMS_knwlBm3_Zd388kK570XM=s1600" alt="Logo PPOBPay">
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="/ppobpay">Home</a></li>
+                    <li><a href="/ppobpay/download.html">Download</a></li>
+                    <li><a href="/ppobpay/daftar-harga.html">Daftar Harga</a></li>
+                    <li><a href="https://wa.me/+6289505687030">Kontak Kami</a></li>
+                    <li><a href="/ppobpay/kebijakan-privasi.html">Kebijakan Privasi</a></li>
+                    <li><a href="/ppobpay/tentang.html">Tentang</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-section">
+        <div class="container">
+            <h1>Tentang PPOBPay</h1>
+            <p><strong>PPOBPay</strong> adalah aplikasi pembayaran digital (PPOB) yang dikembangkan oleh <strong>Ardis App</strong>, sebuah tim pengembang lokal yang berkomitmen menghadirkan solusi teknologi yang praktis, aman, dan terjangkau untuk semua orang.</p>
+            
+            <p>Melalui PPOBPay, kamu bisa melakukan berbagai jenis pembayaran hanya dalam satu aplikasi:</p>
+            <ul>
+                <li>Beli pulsa & paket data semua operator</li>
+                <li>Bayar tagihan PLN pascabayar & beli token listrik</li>
+                <li>Pembayaran BPJS, PDAM, Telkom, TV Kabel</li>
+                <li>Top-up e-wallet seperti Dana, OVO, GoPay, dan lainnya</li>
+                <li>Dan masih banyak lagi!</li>
+            </ul>
+            
+            <p>Kami merancang PPOBPay dengan antarmuka yang sederhana dan ramah pengguna, supaya kamu bisa bertransaksi lebih cepat tanpa harus bingung. Didukung oleh sistem keamanan yang solid dan teknologi terbaru dari Ardis App, semua transaksi kamu terjamin aman dan transparan.</p>
+
+            <h2>Kenapa Pilih PPOBPay?</h2>
+            
+            <div class="feature-box">
+                <h3>Harga Lebih Hemat dan Kompetitif</h3>
+                <p>Nikmati harga produk digital yang lebih murah untuk keuntungan maksimal, baik untuk pemakaian pribadi maupun bisnis.</p>
+            </div>
+            
+            <div class="feature-box">
+                <h3>Transaksi Cepat, 24 Jam Nonstop</h3>
+                <p>Lakukan pembayaran kapan saja dan di mana saja. Sistem kami beroperasi 24/7 untuk melayani semua kebutuhan transaksimu.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3>Riwayat Lengkap dan Mudah Dicek</h3>
+                <p>Semua catatan transaksimu tersimpan rapi dan dapat diakses dengan mudah kapan pun kamu membutuhkannya.</p>
+            </div>
+            
+            <div class="feature-box">
+                <h3>Dukungan Pelanggan yang Siap Membantu</h3>
+                <p>Tim kami selalu siap membantumu jika mengalami kendala atau memiliki pertanyaan seputar layanan PPOBPay.</p>
+            </div>
+            
+            <p>Kami percaya, teknologi harus memudahkan hidup, bukan bikin ribet. Itulah kenapa PPOBPay terus dikembangkan dengan fitur-fitur baru dan perbaikan rutin agar kamu selalu punya pengalaman terbaik.</p>
+            
+            <p>Terima kasih telah memilih PPOBPay.</p>
+            
+            <p class="slogan">Saatnya #BayarPakaiPPOBPay – praktisnya dapet, hematnya juga iya!</p>
+
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>&copy; 2025 PPOBPay. All Rights Reserved.</p>
+                <p>Developed by Ardis</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
