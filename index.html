@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPOBPay - Bayar Tagihan & Isi Pulsa Termurah</title>
+    <meta name="description" content="PPOBPay adalah aplikasi PPOB terlengkap untuk bayar tagihan listrik, air, BPJS, isi pulsa, paket data, dan voucher game dengan mudah, cepat, dan aman.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* ====== General Styles & Variables ====== */
+        :root {
+            --primary-color: #007BFF; /* Biru */
+            --secondary-color: #f4f7fc; /* Abu-abu muda untuk background */
+            --dark-color: #333;
+            --light-color: #fff;
+            --text-color: #555;
+            --header-dark: #111;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            overflow-x: hidden; /* Mencegah scroll horizontal karena animasi */
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        h1, h2, h3 {
+            color: var(--dark-color);
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+        
+        /* Button Style */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        /* ====== Header & Navigation ====== */
+        header {
+            background: var(--header-dark);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--light-color);
+        }
+
+        .logo img {
+            height: 40px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-menu li a {
+            color: var(--light-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            color: var(--light-color);
+            font-size: 1.5rem;
+        }
+
+
+        /* ====== Hero Section ====== */
+        #hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+
+        .hero-text {
+            flex: 1;
+            animation: slideInFromLeft 1s ease-out;
+        }
+
+        .hero-text p {
+            margin: 20px 0 30px;
+            font-size: 1.1rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideInFromRight 1s ease-out;
+        }
+
+        .hero-image img {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            border-radius: 15px;  
+        }
+        
+        /* ====== Features Section ====== */
+        #features {
+            background-color: var(--secondary-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .feature-card {
+            background: var(--light-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .product-icon {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px auto;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* ====== Testimonials Section ====== */
+        #testimonials {
+            padding-bottom: 80px; /* Menambah padding bawah agar tidak terlalu mepet footer */
+        }
+        
+        #testimonials .container {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .testimonial-card {
+            background: #f9f9f9;
+            padding: 40px;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .testimonial-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial-card blockquote {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            border: none;
+        }
+
+        .testimonial-card cite {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        /* ====== Footer ====== */
+        footer {
+            background: var(--dark-color);
+            color: #ccc;
+            text-align: center;
+            padding: 60px 0 30px;
+        }
+
+        footer h2 {
+            color: var(--light-color);
+        }
+
+        footer p {
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .copyright {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.8;
+        }
+        
+        /* ====== Keyframes untuk Animasi ====== */
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+
+        /* ====== Responsive Design ====== */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background-color: var(--header-dark);
+                padding: 20px 0;
+                text-align: center;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                padding: 15px 0;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            #hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 40px;
+            }
+
+            .hero-text {
+                order: 2;
+                animation: none;
+            }
+            
+            .hero-text .btn {
+                margin: 0 auto;
+            }
+
+            .hero-image {
+                order: 1;
+                margin-bottom: 40px;
+                animation: none;
+            }
+            
+            .hero-image img {
+                max-width: 280px;
+            }
+        }
+    </style>
+    </head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjPJ4nIiCbIxH-vZ4CTU_A6tUD0qfyPTmZnbxuLmeRM_srB0rpfzKD0qVji3OHKoMS4uFhR3qh3Rq8TO4p0Shc2R-IAneIowkmklYq8AzUKyV7H2gQc3goUjIUv8_ARIjGnmDnjMYohtyRK4IiC-20LCCL6PVx-RucItAy8bMS_knwlBm3_Zd388kK570XM=s1600" alt="Logo PPOBPay">
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/download.html">Download</a></li>
+                    <li><a href="/daftar-harga.html">Daftar Harga</a></li>
+                    <li><a href="/kontak-kami.html">Kontak Kami</a></li>
+                    <li><a href="/kebijakan-privasi.html">Kebijakan Privasi</a></li>
+                    <li><a href="/tentang.html">Tentang</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="container">
+            <div class="hero-text">
+                <h1>Transaksi PPOB Lengkap & Cepat dalam Genggaman</h1>
+                <p>Bayar semua tagihan bulanan, isi pulsa, token listrik, hingga voucher game dengan mudah. Nikmati harga termurah dan transaksi aman 24 jam.</p>
+                <a href="/download.html" class="btn btn-primary">Coba Sekarang</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgOoqfI79PSQfbEzb_N38lGFsIsSRjPMorWYqzHa31dmbKVEMqzfhd9EdReKCren3_8BMRogtO4M0qEJBpTDgRj_Ag3JypPWP7uVkXEJ6B0YofbHWapYyM-QgPwyLkpSPs_OOr3fxPGg7Zq5TXRJce56nIGRijX3Mv9Mqri8twF-VZMOstKhqW_Rn-gXwDS=s1600" alt="Screenshot Tampilan Aplikasi PPOBPay">
+            </div>
+        </section>
+
+        <section id="features" class="container">
+            <h2>Satu Aplikasi untuk Semua Kebutuhan</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="product-icon">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h3>Produk Terlengkap</h3>
+                    <p>Dari pulsa, paket data, token PLN, hingga bayar tagihan PDAM, BPJS, dan cicilan. Semua ada!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="product-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Transaksi Cepat & Mudah</h3>
+                    <p>Antarmuka yang simpel membuat transaksi Anda selesai dalam hitungan detik, kapan saja dan di mana saja.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="product-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>Harga Termurah</h3>
+                    <p>Dapatkan harga agen yang kompetitif, cocok untuk pemakaian pribadi maupun untuk dijual kembali.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="product-icon">
+                        <i class="fas fa-shield"></i>
+                    </div>
+                    <h3>Aman & Terpercaya</h3>
+                    <p>Dilengkapi sistem keamanan modern dan layanan pelanggan yang siap membantu Anda 24/7.</p>
+                </div>
+            </div>
+            </br>
+        </section>
+        
+        <!--
+        <section id="testimonials">
+            <div class="container">
+                <h2>Apa Kata Pengguna Kami?</h2>
+                <div class="testimonial-card">
+                    <blockquote>
+                        "Aplikasinya keren banget! Bayar tagihan jadi nggak perlu antre lagi. Harganya juga lebih murah dari yang lain. Recommended!"
+                    </blockquote>
+                    <cite>- Budi Santoso, Pengusaha Konter</cite>
+                </div>
+            </div>
+        </section>
+        -->
+
+    </main>
+
+    <footer id="download">
+        <div class="container">
+            <h2>Siap Memulai Kemudahan?</h2>
+            <p>Download aplikasi kami sekarang dan nikmati transaksi tanpa batas.</p>
+            <a href="/download.html" class="btn btn-primary">Download Sekarang</a>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 PPOBPay. All Rights Reserved.</p>
+            <p>Developed by Ardis</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1 // Muncul saat elemen terlihat 10%
+        });
+
+        const animatedElements = document.querySelectorAll('.feature-card, .testimonial-card');
+        animatedElements.forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
