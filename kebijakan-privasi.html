@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebijakan Privasi - PPOBPay</title>
+    <meta name="description" content="Kebijakan Privasi untuk layanan PPOBPay, menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi data Anda.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* ====== General Styles & Variables ====== */
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f4f7fc;
+            --dark-color: #333;
+            --light-color: #fff;
+            --text-color: #555;
+            --header-dark: #111;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.7; /* Increased for better readability */
+            color: var(--text-color);
+            background-color: var(--light-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        h1, h2 {
+            color: var(--dark-color);
+            line-height: 1.3;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-top: 40px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style-position: inside;
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background-color: #eef1f5;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+        
+        /* FIX UNTUK TEKS PANJANG */
+        p, li, code {
+            overflow-wrap: break-word;
+            word-wrap: break-word; /* Kompatibilitas untuk browser lama */
+        }
+        
+        /* ====== Header & Navigation ====== */
+        header {
+            background: var(--header-dark);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--light-color);
+        }
+
+        .logo img {
+            height: 40px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-menu li a {
+            color: var(--light-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            color: var(--light-color);
+            font-size: 1.5rem;
+        }
+
+        /* ====== Content Section ====== */
+        .content-section {
+            flex: 1;
+            padding: 60px 0;
+        }
+
+        /* ====== Footer ====== */
+        footer {
+            background: var(--dark-color);
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.8;
+        }
+
+        /* ====== Responsive Design ====== */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background-color: var(--header-dark);
+                padding: 20px 0;
+                text-align: center;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                padding: 15px 0;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="/ppobpay" class="logo">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjPJ4nIiCbIxH-vZ4CTU_A6tUD0qfyPTmZnbxuLmeRM_srB0rpfzKD0qVji3OHKoMS4uFhR3qh3Rq8TO4p0Shc2R-IAneIowkmklYq8AzUKyV7H2gQc3goUjIUv8_ARIjGnmDnjMYohtyRK4IiC-20LCCL6PVx-RucItAy8bMS_knwlBm3_Zd388kK570XM=s1600" alt="Logo PPOBPay">
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="/ppobpay">Home</a></li>
+                    <li><a href="/ppobpay/download.html">Download</a></li>
+                    <li><a href="/ppobpay/daftar-harga.html">Daftar Harga</a></li>
+                    <li><a href="https://wa.me/+6289505687030">Kontak Kami</a></li>
+                    <li><a href="/ppobpay/kebijakan-privasi.html">Kebijakan Privasi</a></li>
+                    <li><a href="/ppobpay/tentang.html">Tentang</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-section">
+        <div class="container">
+            <h1>Kebijakan Privasi</h1>
+
+            <p>Di PPOBPay, yang dapat diakses dari <a href="/ppobpay">www.ppobpay.com</a> dan dari aplikasi yang dapat Anda unduh dari Play Store (Segera Hadir), salah satu prioritas utama kami adalah privasi pengunjung kami. Dokumen Kebijakan Privasi ini berisi jenis informasi yang dikumpulkan dan dicatat oleh perusahaan kami dan bagaimana kami menggunakannya.</p>
+            <p>Jika Anda memiliki pertanyaan tambahan atau memerlukan informasi lebih lanjut tentang Kebijakan Privasi kami, jangan ragu untuk menghubungi kami melalui tautan ini: <a href="https://wa.me/+6289505687030">Hubungi kami</a></p>
+
+            <h2>Pengumpulan Informasi pada Perangkat</h2>
+            <p>Agar aplikasi dapat berjalan dengan baik saat menggunakan layanan kami, kami mungkin meminta Anda untuk memberikan izin kepada aplikasi kami, termasuk tetapi tidak terbatas pada:</p>
+            <ul>
+                <li><code>android.permission.ACCESS_NETWORK_STATE</code></li>
+                <li><code>android.permission.INTERNET</code></li>
+                <li><code>android.permission.READ_EXTERNAL_STORAGE</code></li>
+                <li><code>android.permission.WRITE_EXTERNAL_STORAGE</code></li>
+                <li><code>android.permission.CAMERA</code></li>
+                <li><code>android.permission.ACCESS_MEDIA_LOCATION</code></li>
+                <li><code>android.permission.ACCESS_FINE_LOCATION</code></li>
+                <li><code>android.permission.ACCESS_COARSE_LOCATION</code></li>
+            </ul>
+            <p>Informasi yang kami minta akan disimpan di perangkat Anda dan server kami dan tidak akan diberikan kepada pihak ketiga mana pun dengan cara apa pun. Izin di atas berlaku untuk aplikasi klien dan aplikasi anggota, tetapi ada beberapa izin lain untuk tujuan notifikasi.</p>
+
+            <h2>Informasi Lokasi</h2>
+            <p>Saat Anda menggunakan layanan kami, kami dapat mengumpulkan informasi tentang lokasi Anda untuk fitur pesanan pengiriman. Dengan izin Anda, kami juga dapat mengumpulkan informasi tentang lokasi presisi Anda menggunakan GPS jika Anda akan memesan dengan opsi pengiriman. Selain fitur pengiriman ini, kami tidak mengumpulkan data GPS Anda.</p>
+
+            <h2>File Log</h2>
+            <p>PPOBPay mengikuti prosedur standar menggunakan file log. File-file ini mencatat pengunjung ketika mereka mengunjungi situs web. Semua perusahaan hosting melakukan ini dan merupakan bagian dari analitik layanan hosting. Informasi yang dikumpulkan oleh file log termasuk alamat protokol internet (IP), jenis peramban, Penyedia Layanan Internet (ISP), stempel tanggal dan waktu, halaman rujukan/keluar, dan mungkin jumlah klik. Ini tidak terkait dengan informasi apa pun yang dapat diidentifikasi secara pribadi. Tujuan dari informasi ini adalah untuk menganalisis tren, mengelola situs, melacak pergerakan pengguna di situs web, dan mengumpulkan informasi demografis.</p>
+
+            <h2>Cookie dan Web Beacon</h2>
+            <p>Seperti situs web lainnya, PPOBPay menggunakan 'cookies'. Cookie ini digunakan untuk menyimpan informasi termasuk preferensi pengunjung, dan halaman-halaman di situs web yang diakses atau dikunjungi pengunjung. Informasi tersebut digunakan untuk mengoptimalkan pengalaman pengguna dengan menyesuaikan konten halaman web kami berdasarkan jenis peramban pengunjung dan/atau informasi lainnya.</p>
+
+            <h2>Tautan ke Situs Web Lain</h2>
+            <p>Toko yang ada mungkin berisi tautan ke situs lain. Jika seseorang mengklik tautan pihak ketiga, maka akan diarahkan ke situs tersebut. Perhatikan bahwa situs eksternal ini tidak dioperasikan oleh PPOBPay. Oleh karena itu, kami sangat menyarankan Anda untuk meninjau Kebijakan Privasi situs web ini. Kami tidak memiliki kendali atas dan tidak bertanggung jawab atas konten, kebijakan privasi, atau praktik situs atau layanan pihak ketiga mana pun.</p>
+
+            <h2>Konten yang Dibuat Pengguna</h2>
+            <p>Anda dapat menulis ulasan di bagian produk kami yang dapat dilihat oleh pelanggan lain. Nama dan foto profil Anda akan ditampilkan di bagian ulasan, tetapi Anda dapat memilih untuk memberikan ulasan anonim, namun itu tidak menjamin bahwa akun Anda tidak akan diblokir jika Anda melanggar ketentuan penggunaan kami.</p>
+            <p>Anda dapat melihat kebijakan konten buatan pengguna kami untuk aplikasi di tautan ini: <a href="#">Syarat Penggunaan PPOBPay</a></p>
+
+            <h2>Informasi yang Kami Kumpulkan</h2>
+            <p>Informasi pribadi yang diminta untuk Anda berikan, dan alasan mengapa Anda diminta untuk memberikannya, akan dijelaskan kepada Anda pada saat kami meminta Anda untuk memberikan informasi pribadi Anda.</p>
+            <p>Ketika Anda mendaftar di aplikasi kami, Anda akan diminta untuk memberikan data pribadi Anda seperti nama lengkap, alamat email, nomor telepon, dan kata sandi Anda untuk login di masa mendatang.</p>
+            <p>Ketika Anda berencana untuk membeli produk fisik kami, Anda akan diminta untuk memberikan informasi lebih lanjut seperti alamat rumah dan lokasi geografis Anda.</p>
+
+            <h2>Bagaimana Kami Menggunakan Informasi Anda</h2>
+            <p>Kami menggunakan informasi yang kami kumpulkan dengan berbagai cara, termasuk untuk:</p>
+            <ul>
+                <li>Menyediakan, mengoperasikan, dan memelihara aplikasi kami</li>
+                <li>Meningkatkan, mempersonalisasi, dan memperluas aplikasi kami</li>
+                <li>Memahami dan menganalisis cara Anda menggunakan layanan kami</li>
+                <li>Mengembangkan produk, layanan, fitur, dan fungsionalitas baru</li>
+                <li>Berkomunikasi dengan Anda, baik secara langsung atau melalui salah satu mitra kami, termasuk untuk layanan pelanggan, untuk memberi Anda pembaruan dan informasi lainnya</li>
+                <li>Menemukan dan mencegah penipuan</li>
+            </ul>
+
+            <h2>Kebijakan Privasi Pihak Ketiga</h2>
+            <p>Server iklan atau jaringan iklan pihak ketiga menggunakan teknologi seperti cookie, JavaScript, atau Web Beacon yang digunakan dalam iklan dan tautan masing-masing yang muncul di PPOBPay, yang dikirim langsung ke peramban pengguna. Mereka secara otomatis menerima alamat IP Anda saat ini terjadi. Teknologi ini digunakan untuk mengukur efektivitas kampanye iklan mereka dan/atau untuk mempersonalisasi konten iklan yang Anda lihat di situs web yang Anda kunjungi.</p>
+            <p>Perhatikan bahwa PPOBPay tidak memiliki akses atau kontrol atas cookie yang digunakan oleh pengiklan pihak ketiga ini.</p>
+            <p>Kebijakan Privasi PPOBPay tidak berlaku untuk pengiklan atau situs web lain. Oleh karena itu, kami menyarankan Anda untuk berkonsultasi dengan Kebijakan Privasi masing-masing dari server iklan pihak ketiga ini untuk informasi yang lebih rinci. Ini mungkin termasuk praktik mereka dan instruksi tentang cara memilih keluar dari opsi tertentu.</p>
+            <p>Anda dapat memilih untuk menonaktifkan cookie melalui opsi peramban individual Anda. Untuk mengetahui informasi lebih rinci tentang manajemen cookie dengan peramban web tertentu, dapat ditemukan di situs web masing-masing peramban.</p>
+
+            <h2>Keamanan</h2>
+            <p>PPOBPay sangat menghargai privasi Anda sebagai pengguna layanan kami. Data sensitif seperti nama, nomor ponsel, alamat email, dan lainnya akan dijaga dengan baik dan tidak akan didistribusikan kepada siapa pun di luar lingkungan aplikasi Anda sendiri. Namun harap diingat bahwa tidak ada metode transmisi melalui internet, atau metode penyimpanan elektronik yang 100% aman dan andal, dan kami tidak dapat menjamin keamanan data, akun, dan layanan Anda secara mutlak.</p>
+            <p>Semua data dan aktivitas Anda akan dikirimkan ke server PPOBPay dengan koneksi https yang aman. Data yang dikirim ke server kami hanyalah data yang Anda berikan.</p>
+
+            <h2>Perubahan Kebijakan Privasi</h2>
+            <p>Kami akan memperbarui kebijakan privasi ini dari waktu ke waktu. Anda disarankan untuk mengunjungi halaman ini secara berkala untuk melihat perubahan yang terjadi. Setiap perubahan akan ditandai dengan tanggal yang tercetak di bagian atas kebijakan privasi ini.</p>
+
+            <h2>Informasi Anak</h2>
+            <p>Bagian lain dari prioritas kami adalah menambahkan perlindungan bagi anak-anak saat menggunakan internet. Kami mendorong orang tua dan wali untuk mengamati, berpartisipasi, dan/atau memantau dan membimbing aktivitas online mereka.</p>
+            <p>PPOBPay tidak secara sadar mengumpulkan Informasi Identitas Pribadi apa pun dari anak-anak di bawah usia 13 tahun. Jika Anda berpikir bahwa anak Anda memberikan informasi semacam ini di situs web kami, kami sangat menganjurkan Anda untuk segera menghubungi kami dan kami akan melakukan upaya terbaik kami untuk segera menghapus informasi tersebut dari catatan kami.</p>
+
+            <h2>Hanya Kebijakan Privasi Online</h2>
+            <p>Kebijakan Privasi ini hanya berlaku untuk aktivitas online kami dan berlaku untuk pengunjung situs web kami sehubungan dengan informasi yang mereka bagikan dan/atau kumpulkan di PPOBPay. Kebijakan ini tidak berlaku untuk informasi apa pun yang dikumpulkan secara offline atau melalui saluran selain situs web ini.</p>
+
+            <h2>Persetujuan</h2>
+            <p>Dengan menggunakan situs web kami, Anda dengan ini menyetujui Kebijakan Privasi kami dan menyetujui Syarat dan Ketentuannya.</p>
+
+        </div>
+    </main>
+    
+    <footer>
+        <div class="copyright">
+            <p>&copy; 2025 PPOBPay. All Rights Reserved.</p>
+            <p>Developed by Ardis</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
