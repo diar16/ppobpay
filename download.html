@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mengunduh PPOBPay...</title>
+    <meta name="description" content="Halaman unduhan otomatis untuk aplikasi PPOBPay.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* ====== General Styles & Variables ====== */
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #f4f7fc;
+            --dark-color: #333;
+            --light-color: #fff;
+            --text-color: #555;
+            --header-dark: #111;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        h1 {
+            color: var(--dark-color);
+            line-height: 1.2;
+            font-weight: 600;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+        
+        /* Button Style */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        /* ====== Header & Navigation ====== */
+        header {
+            background: var(--header-dark);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--light-color);
+        }
+
+        .logo img {
+            height: 40px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-menu li a {
+            color: var(--light-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            color: var(--light-color);
+            font-size: 1.5rem;
+        }
+
+        /* ====== Download Section ====== */
+        .download-section {
+            flex: 1; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 0;
+            background-color: var(--secondary-color);
+        }
+        
+        .download-box {
+            background: var(--light-color);
+            padding: 40px 50px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .download-box p {
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 7px solid #e0e0e0;
+            border-top: 7px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ====== Footer ====== */
+        footer {
+            background: var(--dark-color);
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.8;
+        }
+
+        /* ====== Responsive Design ====== */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background-color: var(--header-dark);
+                padding: 20px 0;
+                text-align: center;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                padding: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjPJ4nIiCbIxH-vZ4CTU_A6tUD0qfyPTmZnbxuLmeRM_srB0rpfzKD0qVji3OHKoMS4uFhR3qh3Rq8TO4p0Shc2R-IAneIowkmklYq8AzUKyV7H2gQc3goUjIUv8_ARIjGnmDnjMYohtyRK4IiC-20LCCL6PVx-RucItAy8bMS_knwlBm3_Zd388kK570XM=s1600" alt="Logo PPOBPay">
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/download.html">Download</a></li>
+                    <li><a href="/daftar-harga.html">Daftar Harga</a></li>
+                    <li><a href="/kontak-kami.html">Kontak Kami</a></li>
+                    <li><a href="/kebijakan-privasi.html">Kebijakan Privasi</a></li>
+                    <li><a href="/tentang.html">Tentang</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="download-section">
+        <div class="download-box">
+            <div class="spinner"></div>
+            <h1>Proses Pengunduhan...</h1>
+            <p>File PPOBPay.apk sedang disiapkan dan akan diunduh secara otomatis. Jika unduhan tidak dimulai, silakan klik tombol di bawah ini.</p>
+            <a href="https://lightsalmon-wren-331429.hostingersite.com/PPOBPay.apk" class="btn btn-primary">Download Manual</a>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="copyright">
+            <p>&copy; 2025 PPOBPay. All Rights Reserved.</p>
+            <p>Developed by Ardis</p>
+        </div>
+    </footer>
+
+    <script>
+        // Automatic Download
+        window.onload = function() {
+            setTimeout(function() {
+                // Baris di bawah ini bisa diaktifkan untuk memulai unduhan otomatis
+                // window.location.href = 'https://lightsalmon-wren-331429.hostingersite.com/PPOBPay.apk';
+            }, 1500); // Jeda 1.5 detik sebelum redirect
+        };
+
+        // Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
