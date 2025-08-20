@@ -156,7 +156,7 @@
             justify-content: space-between;
             gap: 40px;
             padding-top: 80px;
-            padding-bottom: 80px;
+            padding-bottom: 60px; /* Mengurangi padding bawah agar lebih dekat dengan kategori */
         }
 
         .hero-text {
@@ -183,9 +183,60 @@
             height: auto;
             border-radius: 15px;  
         }
+
+        /* ====== Categories Section ====== */
+        #categories {
+            padding: 0 0 40px 0;
+        }
+        
+        /* Tampilan Desktop: Statis dan di tengah */
+        .categories-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        
+        /* Sembunyikan item duplikat di desktop */
+        .categories-grid .category-item:nth-child(n+7) {
+            display: none;
+        }
+
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 100px;
+            transition: transform 0.2s ease;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 1.6rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .category-item span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--dark-color);
+            white-space: nowrap;
+        }
         
         /* ====== Features Section ====== */
         #features {
+            padding-top: 60px;
             background-color: var(--secondary-color);
         }
 
@@ -241,7 +292,7 @@
 
         /* ====== Testimonials Section ====== */
         #testimonials {
-            padding-bottom: 80px; /* Menambah padding bawah agar tidak terlalu mepet footer */
+            padding-bottom: 80px;
         }
         
         #testimonials .container {
@@ -303,25 +354,19 @@
         
         /* ====== Keyframes untuk Animasi ====== */
         @keyframes slideInFromLeft {
-            0% {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            0% { transform: translateX(-100%); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
         }
 
         @keyframes slideInFromRight {
-            0% {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            0% { transform: translateX(100%); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Hanya berlaku untuk animasi scroll di mobile */
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
         }
 
 
@@ -348,17 +393,9 @@
                 display: flex;
             }
             
-            .nav-menu li {
-                padding: 15px 0;
-            }
-
-            h1 {
-                font-size: 2.2rem;
-            }
-
-            h2 {
-                font-size: 1.8rem;
-            }
+            .nav-menu li { padding: 15px 0; }
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
 
             #hero {
                 flex-direction: column;
@@ -381,9 +418,38 @@
                 animation: none;
             }
             
-            .hero-image img {
-                max-width: 280px;
+            .hero-image img { max-width: 280px; }
+            
+            /* Tampilan Mobile: Aktifkan auto-scroll */
+            #categories .container {
+                max-width: 100%;
+                padding: 0;
             }
+
+            .categories-scroll-container {
+                overflow: hidden;
+                -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+                mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            }
+
+            .categories-scroll-container:hover .categories-grid {
+                animation-play-state: paused;
+            }
+
+            .categories-grid {
+                width: max-content;
+                justify-content: flex-start; /* Ganti dari center ke start */
+                animation: scroll 25s linear infinite;
+            }
+            
+            /* Tampilkan kembali item duplikat di mobile */
+            .categories-grid .category-item:nth-child(n+7) {
+                display: flex;
+            }
+
+            .category-item { min-width: 80px; }
+            .categories-grid { gap: 30px; }
+            .category-icon { width: 50px; height: 50px; font-size: 1.4rem; }
         }
     </style>
     </head>
@@ -424,54 +490,110 @@
             </div>
         </section>
 
-        <section id="features" class="container">
-        </br>
-            <h2>Satu Aplikasi untuk Semua Kebutuhan</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="product-icon">
-                        <i class="fas fa-cubes"></i>
+        <section id="categories">
+            <div class="container">
+                <div class="categories-scroll-container">
+                    <div class="categories-grid">
+                        <div class="category-item">
+                            <div class="category-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <span>Pulsa</span>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon"><i class="fas fa-wifi"></i></div>
+                            <span>Paket Data</span>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon"><i class="fas fa-bolt"></i></div>
+                            <span>Token PLN</span>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon"><i class="fas fa-gamepad"></i></div>
+                            <span>Top Up Game</span>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon"><i class="fas fa-wallet"></i></div>
+                            <span>E-Money</span>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                            <span>Bayar Tagihan</span>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <span>Pulsa</span>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon"><i class="fas fa-wifi"></i></div>
+                            <span>Paket Data</span>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon"><i class="fas fa-bolt"></i></div>
+                            <span>Token PLN</span>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon"><i class="fas fa-gamepad"></i></div>
+                            <span>Top Up Game</span>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon"><i class="fas fa-wallet"></i></div>
+                            <span>E-Money</span>
+                        </div>
+                        <div class="category-item">
+                            <div class="category-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                            <span>Bayar Tagihan</span>
+                        </div>
                     </div>
-                    <h3>Produk Terlengkap</h3>
-                    <p>Dari pulsa, paket data, token PLN, hingga bayar tagihan PDAM, BPJS, dan cicilan. Semua ada!</p>
-                </div>
-                <div class="feature-card">
-                    <div class="product-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3>Transaksi Cepat & Mudah</h3>
-                    <p>Antarmuka yang simpel membuat transaksi Anda selesai dalam hitungan detik, kapan saja dan di mana saja.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="product-icon">
-                        <i class="fas fa-tags"></i>
-                    </div>
-                    <h3>Harga Termurah</h3>
-                    <p>Dapatkan harga agen yang kompetitif, cocok untuk pemakaian pribadi maupun untuk dijual kembali.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="product-icon">
-                        <i class="fas fa-shield"></i>
-                    </div>
-                    <h3>Aman & Terpercaya</h3>
-                    <p>Dilengkapi sistem keamanan modern dan layanan pelanggan yang siap membantu Anda 24/7.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="product-icon">
-                        <i class="fas fa-history"></i>
-                    </div>
-                    <h3>Riwayat Transaksi Lengkap</h3>
-                    <p>Lacak semua transaksi Anda dengan mudah. Mulai dari pulsa, paket data, hingga pembayaran tagihan dalam satu tempat.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="product-icon">
-                        <i class="fas fa-bell"></i>
-                    </div>
-                    <h3>Notifikasi Real-time</h3>
-                    <p>Dapatkan notifikasi instan untuk status transaksi yang berhasil, gagal, dan info promo terbaru langsung di ponsel Anda.</p>
                 </div>
             </div>
-            </br>
+        </section>
+        <section id="features">
+            <div class="container">
+                <h2>Satu Aplikasi untuk Semua Kebutuhan</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="product-icon">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <h3>Produk Terlengkap</h3>
+                        <p>Dari pulsa, paket data, token PLN, hingga bayar tagihan PDAM, BPJS, dan cicilan. Semua ada!</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="product-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Transaksi Cepat & Mudah</h3>
+                        <p>Antarmuka yang simpel membuat transaksi Anda selesai dalam hitungan detik, kapan saja dan di mana saja.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="product-icon">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <h3>Harga Termurah</h3>
+                        <p>Dapatkan harga agen yang kompetitif, cocok untuk pemakaian pribadi maupun untuk dijual kembali.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="product-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Aman & Terpercaya</h3>
+                        <p>Dilengkapi sistem keamanan modern dan layanan pelanggan yang siap membantu Anda 24/7.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="product-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h3>Riwayat Transaksi Lengkap</h3>
+                        <p>Lacak semua transaksi Anda dengan mudah. Mulai dari pulsa, paket data, hingga pembayaran tagihan dalam satu tempat.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="product-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <h3>Notifikasi Real-time</h3>
+                        <p>Dapatkan notifikasi instan untuk status transaksi yang berhasil, gagal, dan info promo terbaru langsung di ponsel Anda.</p>
+                    </div>
+                </div>
+            </div>
         </section>
         
         </main>
